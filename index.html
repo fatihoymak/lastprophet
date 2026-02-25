@@ -30,10 +30,6 @@ margin:0 auto;
 padding:30px 22px;
 }
 
-header{
-margin-bottom:24px;
-}
-
 h1{
 margin:0;
 font-size:28px;
@@ -45,13 +41,14 @@ letter-spacing:.5px;
 margin-top:8px;
 color:var(--muted);
 font-size:14px;
+margin-bottom:24px;
 }
 
-.selector-grid{
+.selector{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:14px;
-margin-bottom:22px;
+margin-bottom:20px;
 }
 
 .card{
@@ -83,12 +80,11 @@ font-weight:800;
 margin:8px 0 0;
 font-size:13px;
 color:var(--muted);
-line-height:1.4;
 }
 
 .viewer{
 width:100%;
-height:75vh;
+height:78vh;
 border-radius:18px;
 overflow:hidden;
 border:1px solid var(--stroke);
@@ -100,62 +96,49 @@ width:100%;
 height:100%;
 border:0;
 }
-
-footer{
-margin-top:14px;
-font-size:12px;
-color:var(--muted);
-opacity:.8;
-}
 </style>
 </head>
 
 <body>
 <div class="wrap">
 
-<header>
 <h1>lastprophet</h1>
 <div class="subtitle">Hadis ilimleri üzerine üç ana çalışma • PDF görüntüleyici</div>
-</header>
 
-<div class="selector-grid">
+<div class="selector">
 
-<div class="card active" data-pdf="pdf/hadisusulu.pdf">
+<div class="card active" data-file="pdf/hadisusulu.pdf">
 <h3>Hadis Usûlü</h3>
-<p>Rivayet türleri, sıhhat dereceleri ve temel metodoloji.</p>
+<p>Rivayet türleri, sıhhat dereceleri ve metodoloji.</p>
 </div>
 
-<div class="card" data-pdf="pdf/hukumkoymayetkisi.pdf">
+<div class="card" data-file="pdf/hukumyetkisi.pdf">
 <h3>Peygamber Efendimizin Hüküm Verme Yetkisi</h3>
-<p>Sünnetin bağlayıcılığı ve teşri yetkisinin çerçevesi.</p>
+<p>Sünnetin bağlayıcılığı ve teşri yetkisi.</p>
 </div>
 
-<div class="card" data-pdf="pdf/hadislerinsayısalanalzi.pdf">
+<div class="card" data-file="pdf/hadislerverakamlar.pdf">
 <h3>Hadislerin Sayısal İncelenmesi</h3>
-<p>Rivayet sayıları, tekrarlar ve istatistiksel değerlendirme.</p>
+<p>Rivayet sayıları ve istatistiksel değerlendirme.</p>
 </div>
 
 </div>
 
 <div class="viewer">
-<iframe id="pdfViewer" src="pdf/hadisusulu.pdf"></iframe>
+<iframe id="pdfFrame" src="pdf/hadisusulu.pdf"></iframe>
 </div>
-
-<footer>
-PDF açılmazsa dosya adlarını kontrol edin. GitHub Pages aktif olmalıdır.
-</footer>
 
 </div>
 
 <script>
 const cards = document.querySelectorAll(".card");
-const viewer = document.getElementById("pdfViewer");
+const frame = document.getElementById("pdfFrame");
 
 cards.forEach(card=>{
 card.addEventListener("click",()=>{
 cards.forEach(c=>c.classList.remove("active"));
 card.classList.add("active");
-viewer.src = card.dataset.pdf;
+frame.src = card.dataset.file + "?v=" + Date.now();
 });
 });
 </script>
