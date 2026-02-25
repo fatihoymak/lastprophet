@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>lastprophet</title>
+
+<style>
+:root{
+--bg:#0b0f19;
+--card:#121a2a;
+--stroke:#22304d;
+--text:#e8eefc;
+--muted:rgba(232,238,252,.7);
+--accent:#2b6cff;
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+background:linear-gradient(180deg,#0b0f19 0%, #0e1422 100%);
+color:var(--text);
+}
+
+.wrap{
+max-width:1100px;
+margin:0 auto;
+padding:30px 22px;
+}
+
+header{
+margin-bottom:24px;
+}
+
+h1{
+margin:0;
+font-size:28px;
+font-weight:900;
+letter-spacing:.5px;
+}
+
+.subtitle{
+margin-top:8px;
+color:var(--muted);
+font-size:14px;
+}
+
+.selector-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:14px;
+margin-bottom:22px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--stroke);
+border-radius:18px;
+padding:18px;
+cursor:pointer;
+transition:.25s ease;
+}
+
+.card:hover{
+transform:translateY(-4px);
+border-color:var(--accent);
+}
+
+.card.active{
+border-color:var(--accent);
+box-shadow:0 10px 35px rgba(43,108,255,.25);
+}
+
+.card h3{
+margin:0;
+font-size:16px;
+font-weight:800;
+}
+
+.card p{
+margin:8px 0 0;
+font-size:13px;
+color:var(--muted);
+line-height:1.4;
+}
+
+.viewer{
+width:100%;
+height:75vh;
+border-radius:18px;
+overflow:hidden;
+border:1px solid var(--stroke);
+background:#0f1626;
+}
+
+iframe{
+width:100%;
+height:100%;
+border:0;
+}
+
+footer{
+margin-top:14px;
+font-size:12px;
+color:var(--muted);
+opacity:.8;
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+<h1>lastprophet</h1>
+<div class="subtitle">Hadis ilimleri üzerine üç ana çalışma • PDF görüntüleyici</div>
+</header>
+
+<div class="selector-grid">
+
+<div class="card active" data-pdf="pdf/hadisusulu.pdf">
+<h3>Hadis Usûlü</h3>
+<p>Rivayet türleri, sıhhat dereceleri ve temel metodoloji.</p>
+</div>
+
+<div class="card" data-pdf="pdf/hukumkoymayetkisi.pdf">
+<h3>Peygamber Efendimizin Hüküm Verme Yetkisi</h3>
+<p>Sünnetin bağlayıcılığı ve teşri yetkisinin çerçevesi.</p>
+</div>
+
+<div class="card" data-pdf="pdf/hadislerinsayısalanalzi.pdf">
+<h3>Hadislerin Sayısal İncelenmesi</h3>
+<p>Rivayet sayıları, tekrarlar ve istatistiksel değerlendirme.</p>
+</div>
+
+</div>
+
+<div class="viewer">
+<iframe id="pdfViewer" src="pdf/hadisusulu.pdf"></iframe>
+</div>
+
+<footer>
+PDF açılmazsa dosya adlarını kontrol edin. GitHub Pages aktif olmalıdır.
+</footer>
+
+</div>
+
+<script>
+const cards = document.querySelectorAll(".card");
+const viewer = document.getElementById("pdfViewer");
+
+cards.forEach(card=>{
+card.addEventListener("click",()=>{
+cards.forEach(c=>c.classList.remove("active"));
+card.classList.add("active");
+viewer.src = card.dataset.pdf;
+});
+});
+</script>
+
+</body>
+</html>
